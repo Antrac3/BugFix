@@ -1,0 +1,165 @@
+/* Import ergonomic improvements */
+@import "./styles/ergonomic.css";
+
+/* Import enhanced dashboard styles */
+@import "./styles/enhanced-dashboard.css";
+
+/* Import global ergonomic improvements */
+@import "./styles/global-ergonomic.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * LARP Campaign Manager Theme
+   * Dark fantasy aesthetic with rich purples, golds, and deep textures
+   */
+  :root {
+    --background: 220 27% 98%;
+    --foreground: 220 9% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 9% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 9% 15%;
+
+    --primary: 262 80% 45%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 220 15% 95%;
+    --secondary-foreground: 220 9% 15%;
+
+    --muted: 220 15% 96%;
+    --muted-foreground: 220 6% 46%;
+
+    --accent: 220 15% 94%;
+    --accent-foreground: 220 9% 15%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 262 80% 45%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 220 20% 97%;
+    --sidebar-foreground: 220 9% 20%;
+    --sidebar-primary: 262 80% 45%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 220 15% 93%;
+    --sidebar-accent-foreground: 220 9% 15%;
+    --sidebar-border: 220 13% 88%;
+    --sidebar-ring: 262 80% 45%;
+
+    /* Fantasy Theme Colors */
+    --fantasy-primary: 262 80% 45%;
+    --fantasy-secondary: 280 85% 35%;
+    --fantasy-accent: 320 70% 50%;
+    --fantasy-gold: 45 95% 60%;
+    --fantasy-danger: 0 70% 50%;
+    --fantasy-success: 120 60% 45%;
+  }
+
+  .dark {
+    --background: 220 27% 8%;
+    --foreground: 220 9% 85%;
+
+    --card: 220 27% 10%;
+    --card-foreground: 220 9% 85%;
+
+    --popover: 220 27% 8%;
+    --popover-foreground: 220 9% 85%;
+
+    --primary: 262 80% 55%;
+    --primary-foreground: 220 27% 8%;
+
+    --secondary: 220 27% 15%;
+    --secondary-foreground: 220 9% 85%;
+
+    --muted: 220 27% 12%;
+    --muted-foreground: 220 6% 60%;
+
+    --accent: 220 27% 14%;
+    --accent-foreground: 220 9% 85%;
+
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 220 9% 85%;
+
+    --border: 220 27% 18%;
+    --input: 220 27% 16%;
+    --ring: 262 80% 55%;
+
+    --sidebar-background: 220 27% 6%;
+    --sidebar-foreground: 220 9% 75%;
+    --sidebar-primary: 262 80% 55%;
+    --sidebar-primary-foreground: 220 27% 8%;
+    --sidebar-accent: 220 27% 12%;
+    --sidebar-accent-foreground: 220 9% 85%;
+    --sidebar-border: 220 27% 15%;
+    --sidebar-ring: 262 80% 55%;
+
+    /* Fantasy Theme Colors - Dark Mode */
+    --fantasy-primary: 262 80% 60%;
+    --fantasy-secondary: 280 85% 50%;
+    --fantasy-accent: 320 70% 60%;
+    --fantasy-gold: 45 95% 70%;
+    --fantasy-danger: 0 70% 60%;
+    --fantasy-success: 120 60% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+  }
+
+  /* Custom scrollbar for fantasy theme */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted/20;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/40;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/60;
+  }
+}
+
+@layer components {
+  .fantasy-card {
+    @apply bg-card/95 backdrop-blur-sm border border-border/40 rounded-lg shadow-fantasy;
+  }
+
+  .fantasy-button {
+    @apply bg-fantasy-gradient hover:shadow-fantasy-lg transition-all duration-300;
+  }
+
+  .fantasy-text-glow {
+    @apply text-fantasy-gold animate-glow;
+  }
+
+  .fantasy-border-glow {
+    @apply border-fantasy-primary/50 shadow-[0_0_20px_hsl(var(--fantasy-primary)/0.3)];
+  }
+}
