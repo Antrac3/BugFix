@@ -1,0 +1,397 @@
+/* Ergonomic CSS Improvements for LARP Manager */
+
+/* Font size adjustments based on accessibility settings */
+:root {
+  --font-size-multiplier: 1;
+  --spacing-multiplier: 1;
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+  --min-touch-target: 44px;
+  --animation-duration: 0.2s;
+}
+
+/* Apply font size multiplier */
+html {
+  font-size: calc(16px * var(--font-size-multiplier));
+}
+
+/* High contrast mode */
+.high-contrast {
+  --background: 255 255 255;
+  --foreground: 0 0 0;
+  --muted: 240 240 240;
+  --muted-foreground: 64 64 64;
+  --popover: 255 255 255;
+  --popover-foreground: 0 0 0;
+  --card: 255 255 255;
+  --card-foreground: 0 0 0;
+  --border: 0 0 0;
+  --input: 240 240 240;
+  --primary: 0 0 0;
+  --primary-foreground: 255 255 255;
+  --secondary: 240 240 240;
+  --secondary-foreground: 0 0 0;
+  --accent: 240 240 240;
+  --accent-foreground: 0 0 0;
+  --destructive: 220 38 38;
+  --destructive-foreground: 255 255 255;
+  --ring: 0 0 0;
+  --radius: 0.5rem;
+}
+
+.high-contrast * {
+  border-color: hsl(var(--border)) !important;
+  outline: 1px solid hsl(var(--border));
+}
+
+.high-contrast button,
+.high-contrast input,
+.high-contrast select,
+.high-contrast textarea {
+  border: 2px solid hsl(var(--border)) !important;
+}
+
+/* Reduced motion preferences */
+.reduce-motion,
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* Enhanced focus indicators */
+.enhanced-focus *:focus-visible {
+  outline: var(--focus-ring-width) solid hsl(var(--ring));
+  outline-offset: var(--focus-ring-offset);
+  border-radius: 4px;
+  box-shadow: 0 0 0 calc(var(--focus-ring-width) + var(--focus-ring-offset))
+    hsl(var(--ring) / 0.3);
+}
+
+/* Touch-friendly sizes */
+button,
+input,
+select,
+textarea,
+[role="button"],
+[role="menuitem"],
+[role="tab"] {
+  min-height: var(--min-touch-target);
+  min-width: var(--min-touch-target);
+}
+
+/* Improved link styling */
+a {
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  text-decoration-thickness: 3px;
+}
+
+/* Better form controls */
+input,
+select,
+textarea {
+  padding: 12px;
+  border-radius: 6px;
+  border: 2px solid hsl(var(--border));
+  transition: border-color var(--animation-duration) ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: hsl(var(--ring));
+  box-shadow: 0 0 0 3px hsl(var(--ring) / 0.1);
+}
+
+/* Screen reader optimizations */
+[data-screen-reader="true"] .sr-only {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 4px 8px !important;
+  margin: 2px !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: normal !important;
+  background: hsl(var(--muted));
+  border: 1px solid hsl(var(--border));
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+/* Compact mode adjustments */
+.compact-mode {
+  --spacing-multiplier: 0.75;
+}
+
+.compact-mode .p-4 {
+  padding: calc(1rem * var(--spacing-multiplier));
+}
+
+.compact-mode .p-6 {
+  padding: calc(1.5rem * var(--spacing-multiplier));
+}
+
+.compact-mode .gap-4 {
+  gap: calc(1rem * var(--spacing-multiplier));
+}
+
+.compact-mode .gap-6 {
+  gap: calc(1.5rem * var(--spacing-multiplier));
+}
+
+.compact-mode .space-y-4 > * + * {
+  margin-top: calc(1rem * var(--spacing-multiplier));
+}
+
+.compact-mode .space-y-6 > * + * {
+  margin-top: calc(1.5rem * var(--spacing-multiplier));
+}
+
+/* Improved table accessibility */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid hsl(var(--border));
+}
+
+th {
+  font-weight: 600;
+  background-color: hsl(var(--muted));
+}
+
+tr:hover {
+  background-color: hsl(var(--muted) / 0.5);
+}
+
+/* Loading states */
+@keyframes accessible-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.reduce-motion .animate-pulse {
+  animation: accessible-pulse 2s infinite;
+}
+
+/* Error states */
+.error-state {
+  border: 2px solid hsl(var(--destructive));
+  background-color: hsl(var(--destructive) / 0.1);
+}
+
+.error-message {
+  color: hsl(var(--destructive));
+  font-size: 0.875rem;
+  margin-top: 4px;
+}
+
+/* Success states */
+.success-state {
+  border: 2px solid hsl(142 76% 36%);
+  background-color: hsl(142 76% 36% / 0.1);
+}
+
+/* Warning states */
+.warning-state {
+  border: 2px solid hsl(38 92% 50%);
+  background-color: hsl(38 92% 50% / 0.1);
+}
+
+/* Skip links */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 9999;
+  transition: top var(--animation-duration) ease;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+/* Dark mode optimizations */
+.dark {
+  --fantasy-primary: 120 85% 70%;
+  --fantasy-secondary: 280 65% 75%;
+  --fantasy-accent: 35 85% 70%;
+  --fantasy-gold: 45 90% 70%;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  * {
+    color: black !important;
+    background: white !important;
+  }
+
+  a::after {
+    content: " (" attr(href) ")";
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  :root {
+    --min-touch-target: 48px;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+}
+
+/* Keyboard navigation improvements */
+.keyboard-user *:focus {
+  outline: 3px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* Hide focus outline for mouse users */
+.mouse-user *:focus {
+  outline: none;
+}
+
+/* Custom scrollbar for better UX */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground));
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--accent-foreground));
+}
+
+/* Loading skeleton improvements */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--muted)) 25%,
+    hsl(var(--muted) / 0.5) 50%,
+    hsl(var(--muted)) 75%
+  );
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+.reduce-motion .skeleton {
+  background: hsl(var(--muted));
+  animation: none;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Tooltip improvements */
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: hsl(var(--popover));
+  color: hsl(var(--popover-foreground));
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  z-index: 1000;
+  border: 1px solid hsl(var(--border));
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+/* Card hover states */
+.card-interactive {
+  transition: all var(--animation-duration) ease;
+  cursor: pointer;
+}
+
+.card-interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -3px rgb(0 0 0 / 0.1);
+}
+
+.reduce-motion .card-interactive:hover {
+  transform: none;
+  box-shadow: 0 0 0 2px hsl(var(--ring));
+}
+
+/* Status indicators */
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.status-active {
+  background: hsl(142 76% 36% / 0.1);
+  color: hsl(142 76% 36%);
+}
+
+.status-inactive {
+  background: hsl(var(--muted));
+  color: hsl(var(--muted-foreground));
+}
+
+.status-warning {
+  background: hsl(38 92% 50% / 0.1);
+  color: hsl(38 92% 50%);
+}
+
+.status-error {
+  background: hsl(var(--destructive) / 0.1);
+  color: hsl(var(--destructive));
+}
